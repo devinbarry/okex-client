@@ -51,7 +51,8 @@ class FutureAPI(Client):
 
     # take order
     def take_order(self, instrument_id, type, price, size, client_oid='', order_type='0', match_price='0'):
-        params = {'client_oid': client_oid, 'instrument_id': instrument_id, 'type': type, 'order_type': order_type, 'price': price, 'size': size, 'match_price': match_price}
+        params = {'client_oid': client_oid, 'instrument_id': instrument_id, 'type': type, 'order_type': order_type,
+                  'price': price, 'size': size, 'match_price': match_price}
         return self._request_with_params(POST, FUTURE_ORDER, params)
 
     # take orders
@@ -75,7 +76,8 @@ class FutureAPI(Client):
             params = {'client_oids': client_oids}
         return self._request_with_params(POST, FUTURE_REVOKE_ORDERS + str(instrument_id), params)
 
-    def amend_order(self, instrument_id, cancel_on_fail, order_id='', client_oid='', request_id='', new_size='', new_price=''):
+    def amend_order(self, instrument_id, cancel_on_fail, order_id='', client_oid='', request_id='', new_size='',
+                    new_price=''):
         params = {'cancel_on_fail': cancel_on_fail}
         if order_id:
             params['order_id'] = order_id
@@ -140,7 +142,9 @@ class FutureAPI(Client):
         return self._request_with_params(POST, FUTURE_CANCEL_ALL, params)
 
     # take order_algo
-    def take_order_algo(self, instrument_id, type, order_type, size, trigger_price='', algo_price='', algo_type='', callback_rate='', algo_variance='', avg_amount='', price_limit='', sweep_range='', sweep_ratio='', single_limit='', time_interval=''):
+    def take_order_algo(self, instrument_id, type, order_type, size, trigger_price='', algo_price='', algo_type='',
+                        callback_rate='', algo_variance='', avg_amount='', price_limit='', sweep_range='',
+                        sweep_ratio='', single_limit='', time_interval=''):
         params = {'instrument_id': instrument_id, 'type': type, 'order_type': order_type, 'size': size}
         if order_type == '1': # 止盈止损参数（最多同时存在10单）
             params['trigger_price'] = trigger_price

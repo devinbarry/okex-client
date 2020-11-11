@@ -125,7 +125,8 @@ class OptionAPI(Client):
         return self._request_with_params(GET, OPTION_INSTRUMENTS + str(underlying) + '/summary', params)
 
     def get_option_instruments_summary(self, underlying, instrument_id):
-        return self._request_without_params(GET, OPTION_INSTRUMENTS + str(underlying) + '/summary/' + str(instrument_id))
+        return self._request_without_params(
+            GET, OPTION_INSTRUMENTS + str(underlying) + '/summary/' + str(instrument_id))
 
     def get_depth(self, instrument_id, size=''):
         params = {}
@@ -154,10 +155,10 @@ class OptionAPI(Client):
             params['end'] = end
         if granularity:
             params['granularity'] = granularity
-        # 按时间倒叙 即由结束时间到开始时间
+        # reversed order, from end time to start time
         return self._request_with_params(GET, OPTION_INSTRUMENTS + str(instrument_id) + '/candles', params)
 
-        # 按时间正序 即由开始时间到结束时间
+        # In the positive order of time, from the start time to the end time
         # data = self._request_with_params(GET, OPTION_INSTRUMENTS + str(instrument_id) + '/candles', params)
         # return list(reversed(data))
 

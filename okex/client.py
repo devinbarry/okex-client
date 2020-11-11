@@ -3,7 +3,7 @@ import json
 from . import consts as c, utils, exceptions
 
 
-class Client(object):
+class Client:
 
     def __init__(self, api_key, api_secret_key, passphrase, use_server_time=False, test=False, first=False):
 
@@ -17,15 +17,14 @@ class Client(object):
     def _request(self, method, request_path, params, cursor=False):
         if method == c.GET:
             request_path = request_path + utils.parse_params_to_str(params)
-        # url
         url = c.API_URL + request_path
 
-        # 获取本地时间
+        # Get local time
         timestamp = utils.get_timestamp()
 
         # sign & header
         if self.use_server_time:
-            # 获取服务器时间
+            # Get server time
             timestamp = self._get_timestamp()
 
         body = json.dumps(params) if method == c.POST else ""
