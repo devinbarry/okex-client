@@ -16,7 +16,7 @@ setup(
     url="https://github.com/devinbarry/okex-client",
     python_requires='>=3.6',
     install_requires=REQUIRES,
-    packages=find_packages(),
+    packages=find_packages(exclude=('examples',)),
     include_package_data=True,
     keywords=["OpenAPI", "OKEx", "OKEx API"],
     classifiers=[
